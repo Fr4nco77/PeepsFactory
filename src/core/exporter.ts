@@ -24,6 +24,6 @@ export async function toWebP(svg: string): Promise<Buffer> {
 /**
  * Convierte un string SVG en Avif
  */
-export async function toWAvif(svg: string): Promise<Buffer> {
+export async function toAvif(svg: string): Promise<Buffer> {
   return sharp(Buffer.from(svg)).avif().toBuffer();
 }
