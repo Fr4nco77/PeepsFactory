@@ -4,13 +4,8 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "baseUrl": ".",
-    "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@core/*": ["src/core/*"]
-    },
     "module": "nodenext",
-    "target": "esnext",
+    "target": "ES2022",
     "lib": ["esnext"],
     "types": ["node"],
     "sourceMap": true,
