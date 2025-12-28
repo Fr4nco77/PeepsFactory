@@ -1,5 +1,6 @@
-import { accessories, faces, facialHair, heads } from "../data/options.js";
 import type { PeepAvatar } from "./types.ts";
+import { peepParts } from "../data/options.js";
+const { heads, faces, accessories, facialHair } = peepParts;
 
 // Función para crear un número pseudoaleatorio a partir de un string
 function hashStringToNumber(str: string): number {

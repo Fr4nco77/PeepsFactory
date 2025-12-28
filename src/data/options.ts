@@ -1,4 +1,4 @@
-export const heads = [
+const heads = [
   "Afro",
   "Bangs 2",
   "Bangs",
@@ -47,7 +47,7 @@ export const heads = [
   "Twists",
 ];
 
-export const faces = [
+const faces = [
   "Angry with Fang",
   "Awe",
   "Blank",
@@ -80,7 +80,7 @@ export const faces = [
   "Very Angry",
 ];
 
-export const accessories = [
+const accessories = [
   "Eyepatch",
   "Glasses 2",
   "Glasses 3",
@@ -91,7 +91,7 @@ export const accessories = [
   "Sunglasses",
 ];
 
-export const facialHair = [
+const facialHair = [
   "Chin",
   "Full 2",
   "Full 3",
@@ -109,3 +109,10 @@ export const facialHair = [
   "Moustache 8",
   "Moustache 9",
 ];
+
+export const peepParts = {
+  heads,
+  faces,
+  accessories,
+  facialHair,
+};
