@@ -10,7 +10,7 @@ describe("Exporters", () => {
     expect(buffer).toBeInstanceOf(Buffer);
     expect(buffer.length).toBeGreaterThan(0);
   });
-  
+
   it("convierte un SVG en JPEG buffer", async () => {
     const buffer = await toJPEG(svg);
     expect(buffer).toBeInstanceOf(Buffer);
