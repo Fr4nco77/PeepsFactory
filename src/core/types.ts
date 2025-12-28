@@ -1,14 +1,12 @@
-export interface PeepHead {
+export interface PeepAvatar {
   head: string;
   face: string;
   facialHair?: string;
   accesories?: string;
 }
 
-export interface PeepBody extends PeepHead {
-  body: string;
-}
-
-export interface PeepFullBody extends PeepHead {
-  pose: string;
+export interface CreatePeepAttr {
+  peep: PeepAvatar;
+  background?: string;
+  format: "svg" | "png" | "jpeg" | "webp" | "avif";
 }
