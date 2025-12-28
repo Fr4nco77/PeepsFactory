@@ -17,15 +17,15 @@ function pick<T>(arr: T[], seed: number): T {
 }
 
 // Generador determinístico de PeepAvatar según username
-export function randomPeep(randomSedd?: string): PeepAvatar {
-  const seed = randomSedd
-    ? hashStringToNumber(randomSedd)
+export function randomPeep(randomSeed?: string): PeepAvatar {
+  const seed = randomSeed
+    ? hashStringToNumber(randomSeed)
     : Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
   return {
     head: pick(heads, seed),
-    face: pick(faces, seed >> 2),
-    accesories: pick(accessories, seed >> 4),
-    facialHair: pick(facialHair, seed >> 6),
+    face: pick(faces, Math.floor(seed / 2)),
+    accesories: pick(accessories, Math.floor(seed / 4)),
+    facialHair: pick(facialHair, Math.floor(seed / 6)),
   };
 }
