@@ -1,19 +1,45 @@
 {
   "name": "peeps-factory",
   "version": "1.0.0",
-  "description": "Factory para crear avatares Peeps personalizados y aleatorios",
+  "description": "Generador de avatares SVG modulares y personalizables inspirado en Open Peeps. Permite crear peeps aleatorios o determinísticos, renderizarlos como SVG y exportarlos a formatos de imagen.",
   "keywords": [
+    "avatar",
     "avatars",
-    "peeps",
     "svg",
-    "generator",
-    "random",
-    "profile"
+    "svg-avatar",
+    "avatar-generator",
+    "open-peeps",
+    "peeps",
+    "illustration",
+    "profile-picture",
+    "user-avatar",
+    "random-avatar",
+    "deterministic-avatar",
+    "seed",
+    "frontend",
+    "node",
+    "image-export",
+    "sharp"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "author": "Franco Carreras",
+  "license": "MIT",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/index.js",
@@ -21,9 +47,9 @@
     "format": "prettier . --write",
     "test": "vitest"
   },
-  "author": "Franco Carreras",
-  "license": "MIT",
-  "packageManager": "pnpm@10.17.1",
+  "dependencies": {
+    "sharp": "^0.34.5"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@eslint/json": "^0.14.0",
@@ -35,7 +61,5 @@
     "typescript-eslint": "^8.50.1",
     "vitest": "^4.0.16"
   },
-  "dependencies": {
-    "sharp": "^0.34.5"
-  }
+  "packageManager": "pnpm@10.17.1"
 }
