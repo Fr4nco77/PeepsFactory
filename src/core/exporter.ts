@@ -1,29 +1,21 @@
 import sharp from "sharp";
 
-/**
- * Convierte un string SVG en PNG
- */
+// Convierte un string SVG en PNG
 export async function toPNG(svg: string): Promise<Buffer> {
-  return sharp(Buffer.from(svg)).png().toBuffer();
+  return await sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-/**
- * Convierte un string SVG en JPEG
- */
+// Convierte un string SVG en JPEG
 export async function toJPEG(svg: string): Promise<Buffer> {
-  return sharp(Buffer.from(svg)).jpeg().toBuffer();
+  return await sharp(Buffer.from(svg)).jpeg().toBuffer();
 }
 
-/**
- * Convierte un string SVG en WebP
- */
+// Convierte un string SVG en WebP
 export async function toWebP(svg: string): Promise<Buffer> {
-  return sharp(Buffer.from(svg)).webp().toBuffer();
+  return await sharp(Buffer.from(svg)).webp().toBuffer();
 }
 
-/**
- * Convierte un string SVG en Avif
- */
+// Convierte un string SVG en Avif
 export async function toAvif(svg: string): Promise<Buffer> {
-  return sharp(Buffer.from(svg)).avif().toBuffer();
+  return await sharp(Buffer.from(svg)).avif().toBuffer();
 }

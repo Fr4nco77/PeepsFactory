@@ -1,60 +1,73 @@
-import fs from "fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import type { PeepAvatar } from "./types.ts";
-import { randomPeep } from "./randomizer.js";
+import { generatePeepAvatar } from "./randomizer.js";
+import { loadAsset } from "./utils.js";
+import type { PeepGenerationOptions } from "./types.ts";
 
-export function createPeep(peep: PeepAvatar, background?: string): string {
-  const { head, face, facialHair, accesories } = peep;
+// Crea un avatar tipo "peep" y devuelve el SVG como string.
+export function createPeep({
+  peep,
+  seed,
+  enableAccessories,
+  enableFacialHair,
+  enableColors,
+  enableBackground,
+}: PeepGenerationOptions = {}): string {
+  // Genera las partes del avatar (cabeza, cara, colores, etc.)
+  const {
+    head,
+    hairColor,
+    face,
+    skinColor,
+    facialHair,
+    accessories,
+    background,
+  } = generatePeepAvatar({
+    peep,
+    seed,
+    enableAccessories,
+    enableFacialHair,
+    enableColors,
+    enableBackground,
+  });
 
-  let svg = `<svg width="473px" height="567px" viewBox="0 0 473 567" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">`;
-  if (background)
+  // Comienza el SVG base
+  let svg = `<svg width="600px" height="600px" viewBox="0 0 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">`;
+
+  // Si está habilitado, agrega un rectángulo de fondo
+  if (enableBackground) {
     svg += ` <rect width="100%" height="100%" fill="${background}" />`;
+  }
 
-  svg += loadAsset("head", head);
-  svg += loadAsset("face", face, "155, 185");
-  if (accesories) svg += loadAsset("accessories", accesories, "45, 245");
-  if (facialHair) svg += loadAsset("facial-hair", facialHair, "120, 335");
+  // Renderiza la cabeza
+  svg += loadAsset({
+    category: "heads",
+    name: head!,
+    position: "63.5, 31.25",
+    backgroundColor: skinColor,
+    inkColor: hairColor,
+  });
+
+  // Renderiza la cara
+  svg += loadAsset({ category: "faces", name: face!, position: "220, 215" });
+
+  // Renderiza accesorios si están habilitados
+  if (enableAccessories)
+    svg += loadAsset({
+      category: "accessories",
+      name: accessories!,
+      position: "115, 270",
+    });
+
+  // Renderiza vello facial si está habilitado
+  if (enableFacialHair)
+    svg += loadAsset({
+      category: "facialHair",
+      name: facialHair!,
+      position: "188, 370",
+      inkColor: hairColor,
+    });
+
+  // Cierra el SVG
   svg += `</svg>`;
 
   return svg;
-}
-
-export function createRandomPeep(seed?: string, background?: string): string {
-  const peep = randomPeep(seed);
-  return createPeep(peep, background);
-}
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export function loadAsset(
-  category: string,
-  name: string,
-  position?: string,
-): string {
-  const filePath = path.join(
-    __dirname,
-    "..",
-    "assets",
-    category,
-    `${name}.svg`,
-  );
-  let raw = fs.readFileSync(filePath, "utf-8");
-
-  //   Quitar cabecera y <svg> raíz
-  raw = raw
-    .replace(/<\?xml.*?\?>/g, "")
-    .replace(/<svg[^>]*>/g, "")
-    .replace(/<\/svg>/g, "")
-    .replace(/<title>.*<\/title>/g, "")
-    .replace(/<desc>.*<\/desc>/g, "")
-    .trim();
-
-  if (position) {
-    // Insertar transform en el primer <g>
-    raw = raw.replace(/<g([^>]*)>/, `<g$1 transform="translate(${position})">`);
-  }
-
-  return raw;
 }
