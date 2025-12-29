@@ -17,6 +17,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/index.js",
+    "lint": "eslint .",
+    "format": "prettier . --write",
     "test": "vitest"
   },
   "author": "Franco Carreras",
