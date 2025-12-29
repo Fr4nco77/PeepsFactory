@@ -45,7 +45,7 @@ const heads = [
   "Turban",
   "Twists 2",
   "Twists",
-];
+] as const;
 
 const faces = [
   "Angry with Fang",
@@ -78,7 +78,7 @@ const faces = [
   "Suspicious",
   "Tired",
   "Very Angry",
-];
+] as const;
 
 const accessories = [
   "Eyepatch",
@@ -89,7 +89,7 @@ const accessories = [
   "Glasses",
   "Sunglasses 2",
   "Sunglasses",
-];
+] as const;
 
 const facialHair = [
   "Chin",
@@ -108,11 +108,11 @@ const facialHair = [
   "Moustache 7",
   "Moustache 8",
   "Moustache 9",
-];
+] as const;
 
 export const peepParts = {
   heads,
   faces,
   accessories,
   facialHair,
-};
+} as const;
