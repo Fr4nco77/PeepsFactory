@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { toPNG, toJPEG, toWebP, toAvif } from "../src/core/exporter";
-import { createRandomPeep } from "../src/core/generator";
+import { createPeep } from "../src/core/generator";
 
 describe("Exporters", () => {
-  const svg = createRandomPeep("franco123");
+  const svg = createPeep({ seed: "franco123" });
 
   it("convierte un SVG en PNG buffer", async () => {
     const buffer = await toPNG(svg);
