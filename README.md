@@ -1,10 +1,8 @@
-# 🧑‍🎨 Peeps Factory
+# ✍️ Peeps Generator
 
-**Generador de avatares SVG dinámicos, personalizables y exportables.**
+![Peeps Generator](./src/assets/hero.jpg)
 
-## 📖 Descripción
-
-**Peeps Factory** es una librería pensada para desarrolladores que necesitan crear avatares divertidos y únicos en sus aplicaciones.  
+**Peeps Generator** es una librería pensada para desarrolladores que necesitan crear avatares divertidos y únicos en sus aplicaciones.  
 Con ella podés:
 
 - 🎲 **Generar avatares aleatorios** o determinísticos usando un `seed`.
@@ -17,52 +15,52 @@ La librería está diseñada para ser **simple, modular y extensible**: podés u
 
 ## 📦 Instalación
 
-Puedes instalar **Peeps Factory** con tu gestor de paquetes favorito:
+Puedes instalar **Peeps Generator** con tu gestor de paquetes favorito:
 
 ### Usando pnpm
 
 ```bash
-pnpm add peeps-factory
+pnpm add peeps-generator
 ```
 
 ### Usando npm
 
 ```bash
-npm install peeps-factory
+npm install peeps-generator
 ```
 
 ### Usando yarn
 
 ```bash
-yarn add peeps-factory
+yarn add peeps-generator
 ```
 
 ### Usando bun
 
 ```bash
-bun add peeps-factory
+bun add peeps-generator
 ```
 
-## 🚀 Uso básico
+## 🧩 Uso
 
-En **Peeps Factory**, todo comienza con una sola función: `createPeep`.  
+Con **Peeps Generator**, todo comienza con una sola función: `createPeep`.  
 Es el núcleo de la librería: allí vive la lógica que genera los avatares peeps y compone cada una de sus partes.
 Su resultado es un string que contiene un SVG completo, ya compuesto y listo para renderizar o exportar.
 
 ### Crea tu primer peep
 
 ```ts
-import { createPeep } from "peeps-factory";
+import { createPeep } from "peeps-generator";
 
 const svg = createPeep();
 ```
 
 Este llamado genera un peep aleatorio con una configuración mínima, donde solo se renderizan las capas esenciales:
 
-- un avatar monocromático
-- sin background
-- sin accesorios
-- sin vello facial
+- Un avatar monocromático
+- Sin background
+- Sin accesorios
+- Sin vello facial
 
 ---
 
@@ -74,7 +72,7 @@ Cada capa puede existir o no, según tu intención.
 Para eso están las opciones `enable*`.
 
 ```ts
-import { createPeep } from "peeps-factory";
+import { createPeep } from "peeps-generator";
 
 const svg = createPeep({
   enableAccessories: true,
@@ -108,7 +106,7 @@ El `seed` permite que la generación del peep sea **determinística**.
 Esto significa que, usando la misma semilla, el resultado visual será siempre el mismo.
 
 ```ts
-import { createPeep } from "peeps-factory";
+import { createPeep } from "peeps-generator";
 
 const svg = createPeep({
   seed: "usuario123",
@@ -122,9 +120,9 @@ Mientras el `seed` no cambie, el peep generado será idéntico en cada ejecució
 
 Esto es útil para:
 
-- avatares asociados a un usuario
-- identidades visuales persistentes
-- sistemas donde el avatar no debe cambiar con el tiempo
+- Avatares asociados a un usuario
+- Identidades visuales persistentes
+- Sistemas donde el avatar no debe cambiar con el tiempo
 
 Si no se especifica un seed, cada llamada a createPeep puede producir un peep distinto.
 
@@ -132,12 +130,12 @@ Si no se especifica un seed, cada llamada a createPeep puede producir un peep di
 
 ### Crear un peep personalizado o parcialmente aleatorio
 
-Además de la generación automática, **Peeps Factory** permite definir manualmente algunas o todas las partes del peep y dejar que la librería complete el resto.
+Además de la generación automática, **Peeps Generator** permite definir manualmente algunas o todas las partes del peep y dejar que la librería complete el resto.
 
 Esto se hace usando la opción `peep`.
 
 ```ts
-import { createPeep } from "peeps-factory";
+import { createPeep } from "peeps-generator";
 
 const svg = createPeep({
   peep: {
@@ -153,10 +151,10 @@ const svg = createPeep({
 
 En este ejemplo:
 
-- la cabeza y la cara están definidas explícitamente
-- el color de cabello y de piel se establecen manualmente
-- los accesorios se generan de forma aleatoria
-- el color de fondo se genera automáticamente
+- La cabeza y la cara están definidas explícitamente
+- El color de cabello y de piel se establecen manualmente
+- Los accesorios se generan de forma aleatoria
+- El color de fondo se genera automáticamente
 
 ---
 
@@ -164,13 +162,15 @@ En este ejemplo:
 
 Al crear un peep, podés definir de forma opcional cualquiera de las siguientes propiedades dentro de `peep`:
 
-- **head**: tipo de cabeza o peinado
-- **face**: expresión facial
-- **hairColor**: color del cabello
-- **skinColor**: color de piel
-- **facialHair**: tipo de vello facial
-- **accessories**: accesorios
-- **background**: color de fondo
+| Propiedad     | Descripción               | Tipo de valor                     |
+| ------------- | ------------------------- | --------------------------------- |
+| `head`        | Tipo de cabeza o peinado  | String de `peepParts.heads`       |
+| `face`        | Expresión facial          | String de `peepParts.faces`       |
+| `hairColor`   | Color del cabello         | String (color CSS)                |
+| `skinColor`   | Color de piel             | String (color CSS)                |
+| `facialHair`  | Tipo de vello facial      | String de `peepParts.facialHair`  |
+| `accessories` | Accesorios                | String de `peepParts.accessories` |
+| `background`  | Color de fondo del avatar | String (color CSS)                |
 
 Estas opciones solo se aplican si la capa correspondiente está habilitada mediante las opciones `enable*`.
 
@@ -188,7 +188,7 @@ El sistema solo decide aquellas partes que no fueron especificadas y que están 
 
 ### Acceso a las partes de un peep
 
-**Peeps Factory** expone el listado completo de partes disponibles para cada capa del avatar: cabezas, caras, accesorios y vello facial.
+**Peeps Generator** expone el listado completo de partes disponibles para cada capa del avatar: cabezas, caras, accesorios y vello facial.
 
 Estos listados contienen los nombres exactos de cada asset, y representan el universo visual con el que trabaja la biblioteca.  
 Usarlos garantiza que cualquier combinación que elijas sea válida y renderizable.
@@ -196,20 +196,20 @@ Usarlos garantiza que cualquier combinación que elijas sea válida y renderizab
 Para acceder a estas partes, simplemente importalas desde la biblioteca:
 
 ```ts
-import { peepParts } from "peeps-factory";
+import { peepParts } from "peeps-generator";
 
 const { heads, faces, accessories, facialHair } = peepParts;
 ```
 
 Tener acceso a estas partes permite, por ejemplo:
 
-- construir editores visuales o configuradores de avatar
-- crear selectores o formularios guiados
-- validar entradas del usuario antes de generar un peep
-- generar previews, catálogos o grids de avatares
-- limitar o expandir opciones según reglas propias de tu aplicación
+- Construir editores visuales o configuradores de avatar
+- Crear selectores o formularios guiados
+- Validar entradas del usuario antes de generar un peep
+- Generar previews, catálogos o grids de avatares
+- Limitar o expandir opciones según reglas propias de tu aplicación
 
-De esta forma, **Peeps Factory** no solo genera avatares:  
+De esta forma, **Peeps Generator** no solo genera avatares:  
 también te da las piezas para diseñar experiencias alrededor de ellos.
 
 ---
@@ -221,9 +221,9 @@ es **un string SVG puro**.
 
 Ese string es, al mismo tiempo:
 
-- texto que podés guardar, enviar o transformar
-- una imagen vectorial lista para renderizar
-- un formato independiente de framework o plataforma
+- Texto que podés guardar, enviar o transformar
+- Una imagen vectorial lista para renderizar
+- Un formato independiente de framework o plataforma
 
 Con él podés:
 
@@ -248,7 +248,7 @@ Cuando necesitás trabajar con imágenes rasterizadas (píxeles), la biblioteca 
 ### Convertir a PNG
 
 ```ts
-import { toPNG } from "peeps-factory";
+import { toPNG } from "peeps-generator";
 
 const pngBuffer = await toPNG(svg);
 ```
@@ -256,7 +256,7 @@ const pngBuffer = await toPNG(svg);
 ### Convertir a JPEG
 
 ```ts
-import { toJPEG } from "peeps-factory";
+import { toJPEG } from "peeps-generator";
 
 const jpegBuffer = await toJPEG(svg);
 ```
@@ -264,7 +264,7 @@ const jpegBuffer = await toJPEG(svg);
 ### Convertir a WebP
 
 ```ts
-import { toWebP } from "peeps-factory";
+import { toWebP } from "peeps-generator";
 
 const webpBuffer = await toWebP(svg);
 ```
@@ -272,17 +272,17 @@ const webpBuffer = await toWebP(svg);
 ### Convertir a AVIF
 
 ```ts
-import { toAvif } from "peeps-factory";
+import { toAvif } from "peeps-generator";
 
 const avifBuffer = await toAvif(svg);
 ```
 
 Cada una de estas funciones recibe el string SVG y devuelve un buffer de imagen listo para:
 
-- guardar en disco
-- enviar por API
-- subir a un CDN
-- usar en procesos de generación de asset
+- Guardar en disco
+- Enviar por API
+- Subir a un CDN
+- Usar en procesos de generación de asset
 
 ---
 
@@ -294,7 +294,7 @@ Cada una de estas funciones recibe el string SVG y devuelve un buffer de imagen 
 
 ## 🪶 Créditos y atribución
 
-Los assets visuales utilizados por **Peeps Factory** están inspirados en  
+Los assets visuales utilizados por **Peeps Generator** están inspirados en  
 **Open Peeps**, una colección de ilustraciones creada por Pablo Stanley.
 
 Proyecto original:  
@@ -318,6 +318,3 @@ Esto significa que podés:
 - Integrarlo en tus propias aplicaciones
 
 Siempre que se mantenga la nota de copyright y la licencia original.
-
-El código es libre.  
-Los rostros también.

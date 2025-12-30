@@ -1,5 +1,5 @@
 {
-  "name": "peeps-factory",
+  "name": "peeps-generator",
   "version": "1.0.0",
   "description": "Generador de avatares SVG modulares y personalizables inspirado en Open Peeps. Permite crear peeps aleatorios o determinísticos, renderizarlos como SVG y exportarlos a formatos de imagen.",
   "keywords": [
