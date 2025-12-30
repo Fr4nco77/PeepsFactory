@@ -18,27 +18,27 @@ export function generatePeepAvatar({
 
   return {
     head: peep?.head ?? pickFromArray(heads, currentSeed),
-    face: peep?.face ?? pickFromArray(faces, Math.floor(currentSeed / 3)),
+    face: peep?.face ?? pickFromArray(faces, Math.floor(currentSeed / 2)),
     ...(enableAccessories && {
       accessories:
         peep?.accessories ??
-        pickFromArray(accessories, Math.floor(currentSeed / 5)),
+        pickFromArray(accessories, Math.floor(currentSeed / 3)),
     }),
     ...(enableFacialHair && {
       facialHair:
         peep?.facialHair ??
-        pickFromArray(facialHair, Math.floor(currentSeed / 6)),
+        pickFromArray(facialHair, Math.floor(currentSeed / 4)),
     }),
     ...(enableBackground && {
       background:
-        peep?.background ?? generateHexColor(Math.floor(currentSeed / 2)),
+        peep?.background ?? generateHexColor(Math.floor(currentSeed / 5)),
     }),
 
     ...(enableColors && {
       hairColor:
-        peep?.hairColor ?? generateHexColor(Math.floor(currentSeed / 2)),
+        peep?.hairColor ?? generateHexColor(Math.floor(currentSeed / 6)),
       skinColor:
-        peep?.skinColor ?? generateHexColor(Math.floor(currentSeed / 4)),
+        peep?.skinColor ?? generateHexColor(Math.floor(currentSeed / 7)),
     }),
   };
 }
