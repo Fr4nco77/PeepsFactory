@@ -1,6 +1,6 @@
 {
   "name": "peeps-generator",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Generador de avatares SVG modulares y personalizables inspirado en Open Peeps. Permite crear peeps aleatorios o determinísticos, renderizarlos como SVG y exportarlos a formatos de imagen.",
   "keywords": [
     "avatar",
@@ -25,13 +25,11 @@
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
-  "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     }
   },
   "files": [
