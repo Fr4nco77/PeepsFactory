@@ -1,6 +1,6 @@
 # ✍️ Peeps Generator
 
-![Peeps Generator](./src/assets/hero.jpg)
+![Peeps Generator](https://res.cloudinary.com/dcav0ojcf/image/upload/v1767064041/videos%20de%20webs%28en%20uso%2C%20no%20borrar%29/hero_kkpcfd.jpg)
 
 **Peeps Generator** es una librería pensada para desarrolladores que necesitan crear avatares divertidos y únicos en sus aplicaciones.  
 Con ella podés:
