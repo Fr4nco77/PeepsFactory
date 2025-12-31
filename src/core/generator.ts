@@ -6,6 +6,7 @@ import type { PeepGenerationOptions } from "./types.ts";
 export function createPeep({
   peep,
   seed,
+  size = 600,
   enableAccessories,
   enableFacialHair,
   enableColors,
@@ -30,7 +31,7 @@ export function createPeep({
   });
 
   // Comienza el SVG base
-  let svg = `<svg width="600px" height="600px" viewBox="0 0 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">`;
+  let svg = `<svg width="${size}" height="${size}" viewBox="0 0 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">`;
 
   // Si está habilitado, agrega un rectángulo de fondo
   if (enableBackground) {

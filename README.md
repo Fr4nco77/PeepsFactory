@@ -7,11 +7,19 @@ Con ella podés:
 
 - 🎲 **Generar avatares aleatorios** o determinísticos usando un `seed`.
 - 🎨 **Personalizar cada parte del avatar** (cabeza, cara, accesorios, barba/bigote, fondo, colores, etc).
-- 🖼️ **Renderizar en SVG** para usar directamente en el frontend.
+- 🖼️ **Renderizar en SVG** listo para ser enviado al frontend y renderizado en el navegador.
 - 📤 **Exportar a PNG, JPEG, WebP o AVIF** para guardar o compartir en cualquier plataforma.
-- ⚙️ **Integrar un editor visual** en tu frontend para que los usuarios creen y descarguen sus propios avatares.
+- ⚙️ **Integrar un editor visual en tu frontend**, generando los avatares desde el servidor.
 
 La librería está diseñada para ser **simple, modular y extensible**: podés usarla tanto en proyectos Node.js como en aplicaciones web modernas.
+
+## 🔗 Enlaces oficiales
+
+- 📦 **Repositorio en GitHub**  
+  https://github.com/Fr4nco77/Peeps-Generator
+
+- 🎨 **Editor visual online (demo)**  
+  https://peep-generator.vercel.app/
 
 ## 📦 Instalación
 
@@ -40,6 +48,58 @@ yarn add peeps-generator
 ```bash
 bun add peeps-generator
 ```
+
+## 🧠 Entorno de ejecución (importante)
+
+**Peeps Generator está diseñada para ejecutarse en entornos Node.js.**
+
+La librería utiliza APIs nativas de Node para funcionar correctamente, entre ellas:
+
+- Acceso al sistema de archivos para cargar los assets SVG
+- Procesamiento y composición de imágenes
+- Exportación a formatos rasterizados mediante `sharp`
+
+Por esta razón, la generación del avatar **no ocurre en el navegador**, sino en el entorno donde corre Node.
+
+### ✔️ Entornos soportados
+
+- Node.js
+- Backends (Express, Fastify, Nest, etc.)
+- Server-Side Rendering (SSR) ejecutado en Node, por ejemplo:
+  - Next.js (`runtime: "nodejs"`)
+  - Remix (Node adapter)
+  - Astro con SSR en Node
+- Scripts, workers o pipelines de generación de imágenes
+
+### ❌ Entornos no soportados directamente
+
+- Navegador (browser puro)
+- Aplicaciones React/Vite ejecutadas solo del lado del cliente
+- Edge runtimes (Cloudflare Workers, Vercel Edge, etc.)
+
+> Si querés usar Peeps Generator en una aplicación web,  
+> la generación del avatar debe realizarse **del lado del servidor**,  
+> y luego enviar el SVG o la imagen resultante al frontend.
+
+Esta decisión es intencional y permite que la librería sea **simple, predecible y consistente**, evitando duplicar lógica o introducir dependencias específicas del navegador.
+
+## 🎨 Editor visual (demo interactiva)
+
+Si estás construyendo un frontend o tenés dudas sobre cómo integrar **Peeps Generator** en una aplicación web,  
+podés probar el **editor visual online**:
+
+👉 https://peep-generator.vercel.app/
+
+Este editor:
+
+- Genera los avatares desde el **servidor**
+- Renderiza el SVG en el navegador
+- Permite activar o desactivar capas
+- Cambiar tamaños, seed y combinaciones
+- Descargar el avatar en distintos formatos
+
+Es un ejemplo real de cómo usar la librería en un entorno **Next.js con SSR**,  
+y puede servirte como referencia arquitectónica si querés implementar tu propio editor o configurador.
 
 ## 🧩 Uso
 
@@ -97,6 +157,40 @@ Estas opciones indican **qué partes pueden aparecer** en el avatar:
   Agrega un color de fondo al SVG.
 
 Si una opción no está habilitada, esa capa simplemente no se renderiza.
+
+---
+
+### Controlar el tamaño del avatar
+
+Podés definir el tamaño final del avatar usando la opción `size`.
+
+```ts
+import { createPeep } from "peeps-generator";
+
+const svg = createPeep({
+  size: 128,
+});
+```
+
+Esto genera un avatar de **128 × 128 píxeles.**
+
+#### ¿Qué hace size?
+
+- Define el ancho y alto del SVG final.
+- Mantiene todas las proporciones del avatar.
+- No afecta la lógica de generación ni las partes internas.
+
+#### Valor por defecto
+
+Si no se especifica size, se genera un avatar de **600x600 pixeles**.
+
+#### Ejemplos comunes
+
+```ts
+createPeep({ size: 64 }); // iconos, listas
+createPeep({ size: 256 }); // previews
+createPeep({ size: 1024 }); // exportación o impresión
+```
 
 ---
 

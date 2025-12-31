@@ -20,6 +20,7 @@ export interface Peep {
 export interface PeepGenerationOptions {
   peep?: Peep;
   seed?: string;
+  size?: number;
   enableAccessories?: boolean;
   enableFacialHair?: boolean;
   enableColors?: boolean;
