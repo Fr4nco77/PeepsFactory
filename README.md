@@ -386,16 +386,75 @@ Cada una de estas funciones recibe el string SVG y devuelve un buffer de imagen 
 - Internamente utilizan sharp.
 - Devuelven un Buffer listo para guardar en disco, enviar por red o procesar.
 
+## ⚠️ Errores comunes y soluciones
+
+### Error 500 en `/api` en producción (funciona en local)
+
+**Síntomas**
+
+- `POST /api 500 (Internal Server Error)`
+- La aplicación funciona correctamente en desarrollo local
+- En los logs de Vercel aparece un error similar a:
+
+```text
+ENOENT: no such file or directory, open
+.../node_modules/peeps-generator/dist/assets/heads/SomeFile.svg
+```
+
+### Causa
+
+`peeps-generator` carga archivos SVG desde su carpeta interna
+`dist/assets`.
+
+En entornos serverless (como Vercel), **Next.js no incluye automáticamente
+archivos estáticos que están dentro de `node_modules`**, a menos que se
+indique explícitamente durante el build.
+
+Por eso, en producción la API no encuentra los SVG necesarios y falla.
+
+---
+
+### Solución
+
+1. **Forzar runtime Node.js en la ruta API**
+
+   ```ts
+   export const runtime = "nodejs";
+   ```
+
+   **`peeps-generator` no es compatible con Edge Runtime.**
+
+2. **Incluir los assets del generador en next.config.ts**
+
+   ```ts
+   import type { NextConfig } from "next";
+
+   const nextConfig: NextConfig = {
+     outputFileTracingIncludes: {
+       "/api/**": ["node_modules/peeps-generator/dist/assets/**/\*"],
+     },
+   };
+
+   export default nextConfig;
+   ```
+
+3. **Volver a desplegar el proyecto**
+
+Luego de aplicar los cambios:
+
+- Si es necesario, limpiar la caché del build
+- Hacer un nuevo deploy en Vercel
+
 ## 🪶 Créditos y atribución
 
-Los assets visuales utilizados por **Peeps Generator** están inspirados en  
+Los assets visuales utilizados por **Peeps Generator** están inspirados en
 **Open Peeps**, una colección de ilustraciones creada por Pablo Stanley.
 
-Proyecto original:  
+Proyecto original:
 https://www.openpeeps.com/
 
-Esta librería no busca reemplazar ni redistribuir el proyecto original,  
-sino ofrecer una forma programática de **componer, combinar y generar avatares**  
+Esta librería no busca reemplazar ni redistribuir el proyecto original,
+sino ofrecer una forma programática de **componer, combinar y generar avatares**
 a partir de ilustraciones modulares.
 
 Todo el mérito artístico pertenece a su autor original.
