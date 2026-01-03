@@ -26,3 +26,5 @@ export interface PeepGenerationOptions {
   enableColors?: boolean;
   enableBackground?: boolean;
 }
+
+export type Format = "png" | "jpg" | "jpeg" | "webp" | "avif";

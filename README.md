@@ -339,7 +339,11 @@ Ese SVG es la fuente original del avatar.
 
 Cuando necesitás trabajar con imágenes rasterizadas (píxeles), la biblioteca permite convertir ese SVG a distintos formatos de imagen mediante las funciones `to*`.
 
-### Convertir a PNG
+### Exportación unitaria por formato
+
+Si necesitás un formato específico, podés usar directamente las funciones dedicadas:
+
+#### Convertir a PNG
 
 ```ts
 import { toPNG } from "peeps-generator";
@@ -347,7 +351,7 @@ import { toPNG } from "peeps-generator";
 const pngBuffer = await toPNG(svg);
 ```
 
-### Convertir a JPEG
+#### Convertir a JPEG
 
 ```ts
 import { toJPEG } from "peeps-generator";
@@ -355,7 +359,7 @@ import { toJPEG } from "peeps-generator";
 const jpegBuffer = await toJPEG(svg);
 ```
 
-### Convertir a WebP
+#### Convertir a WebP
 
 ```ts
 import { toWebP } from "peeps-generator";
@@ -363,7 +367,7 @@ import { toWebP } from "peeps-generator";
 const webpBuffer = await toWebP(svg);
 ```
 
-### Convertir a AVIF
+#### Convertir a AVIF
 
 ```ts
 import { toAvif } from "peeps-generator";
@@ -377,6 +381,33 @@ Cada una de estas funciones recibe el string SVG y devuelve un buffer de imagen 
 - Enviar por API
 - Subir a un CDN
 - Usar en procesos de generación de asset
+
+---
+
+### Exportador universal (exportTo)
+
+Además de las funciones unitarias, **Peeps Generator** expone un exportador universal que permite convertir el SVG al formato deseado usando una sola función.
+
+```ts
+import { exportTo } from "peeps-generator";
+
+const buffer = await exportTo(svg, "png");
+```
+
+#### Formatos soportados
+
+- `"png"`
+- `"jpg"` / `"jpeg"`
+- `"webp"`
+- `"avif"`
+
+Este enfoque es útil cuando:
+
+- El formato se decide dinámicamente
+- Querés simplificar lógica condicional
+- Necesitás una API más genérica y expresiva
+
+El resultado es siempre un **Buffer**, independientemente del formato elegido.
 
 ---
 
